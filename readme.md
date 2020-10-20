@@ -8,3 +8,7 @@
    - Postgres [https://node-postgres.com/] `npm install pg`
    - Nodemon [https://www.npmjs.com/package/nodemon] `npm i nodemon -g` Permite recargar automaticamente el api.
 4. Crear el server que genera el API
+5. Inicializar el api
+
+- node api/index.js
+- nodemon api/index.js

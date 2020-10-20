@@ -8,6 +8,10 @@ router.get("/api/v1", (request, response) => {
   response.send("Hola Mundo");
 });
 
+/**
+ * ENDPOINST
+ */
+
 router
   .get("/api/v1/users", userController.getUsers)
   .post("/api/v1/users", userController.saveUser)
