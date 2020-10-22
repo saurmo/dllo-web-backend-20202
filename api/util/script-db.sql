@@ -41,12 +41,12 @@ CREATE TABLE public.seguimientos (
 	mano_obra text NOT NULL,
 	repuestos text NOT NULL,	
 	horas integer  NOT NULL,
+	imagen varchar NULL,
 	CONSTRAINT seguimientos_pk PRIMARY KEY (id)
 );
 
-
-
 ALTER TABLE public.usuarios ADD CONSTRAINT usuarios_roles_fk FOREIGN KEY (rol) REFERENCES roles(id) ON UPDATE CASCADE;
+
 ALTER TABLE public.motos ADD CONSTRAINT motos_usuarios_fk FOREIGN KEY (id_propietario) REFERENCES usuarios(id) ON UPDATE CASCADE;
 
 ALTER TABLE public.seguimientos ADD CONSTRAINT seguimientos_usuarios_fk FOREIGN KEY (id_mecanico) REFERENCES usuarios(id) ON UPDATE CASCADE;

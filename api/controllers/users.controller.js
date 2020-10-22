@@ -2,23 +2,31 @@ const ServicePostgres = require("../services/postgres");
 const _servicePg = new ServicePostgres();
 
 const getUsers = async (request, response) => {
-  const sql =
-    "SELECT usuarios.*, roles.nombre nombre_rol FROM usuarios INNER JOIN roles ON roles.id = usuarios.rol";
-  let responseDB = await _servicePg.execute(sql);
-  let rowCount = responseDB.rowCount;
-  let rows = responseDB.rows;
+  try {
+    const sql =
+      "SELECT usuarios.*, roles.nombre nombre_rol FROM usuarios INNER JOIN roles ON roles.id = usuarios.rol";
+    let responseDB = await _servicePg.execute(sql);
+    let rowCount = responseDB.rowCount;
+    let rows = responseDB.rows;
+    rows = rows.map((x) => {
+      delete x.clave;
+      return x;
+    });
 
-  rows = rows.map((x) => {
-    delete x.clave;
-    return x;
-  });
-
-  let responseJSON = {};
-  responseJSON.ok = true;
-  responseJSON.message = "Users ok";
-  responseJSON.info = rows;
-  responseJSON.metainfo = { total: rowCount };
-  response.send(responseJSON);
+    let responseJSON = {};
+    responseJSON.ok = true;
+    responseJSON.message = "Users ok";
+    responseJSON.info = rows;
+    responseJSON.metainfo = { total: rowCount };
+    response.send(responseJSON);
+  } catch (error) {
+    console.log(error);
+    let responseJSON = {};
+    responseJSON.ok = false;
+    responseJSON.message = "Error while get user.";
+    responseJSON.info = error;
+    response.status(400).send(responseJSON);
+  }
 };
 
 const saveUser = async (request, response) => {
