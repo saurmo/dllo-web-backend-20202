@@ -33,14 +33,17 @@ const loginUser = async (request, response) => {
   }
 };
 
+/**
+ *
+ * @param {Request} request
+ * @param {Response} response
+ */
 const validToken = (request, response) => {
   let responseJSON = {};
   responseJSON.ok = true;
   try {
-    let headers = request.headers.authorization.split(" ");
-    let token = headers[1];
     responseJSON.message = "Users ok";
-    responseJSON.info = jwt.validToken(token);
+    responseJSON.info = decodeToken(request);
     response.send(responseJSON);
   } catch (error) {
     responseJSON.ok = false;
@@ -50,4 +53,45 @@ const validToken = (request, response) => {
   }
 };
 
-module.exports = { loginUser, validToken };
+/**
+ *
+ * @param {Request} request
+ * @param {Response} response
+ * @param {*} next
+ */
+const middleware = (request, response, next) => {
+  try {
+    console.log(request.url);
+    let token = decodeToken(request);
+    request._token = token;
+    next();
+  } catch (error) {
+    let responseJSON = {};
+    responseJSON.ok = false;
+    responseJSON.message = "Error while valid middleware.";
+    responseJSON.info = error;
+    response.status(400).send(responseJSON);
+  }
+};
+
+/**
+ *
+ * @param {Request} request
+ * @param {Response} response
+ * @param {*} next
+ */
+const notFound = (request, response) => {
+  let responseJSON = {};
+  responseJSON.ok = false;
+  responseJSON.message = "Error, endpoint not found";
+  responseJSON.info = request.url;
+  response.status(404).send(responseJSON);
+};
+
+const decodeToken = (request) => {
+  let headers = request.headers.authorization.split(" ");
+  let token = headers[1];
+  return jwt.validToken(token);
+};
+
+module.exports = { loginUser, validToken, middleware, notFound };

@@ -7,15 +7,16 @@ const trackingController = require("../controllers/tracking.controller");
 const authController = require("../controllers/auth.controller");
 
 router.get("/api/v1", (request, response) => {
-  response.send("Hola Mundo");
+  response.send("Api el-taller");
 });
 
 /**
- * ENDPOINST
+ * ENDPOINTS
  */
 
 router
   .post("/api/v1/login", authController.loginUser)
+  .use("/", authController.middleware)
   .get("/api/v1/valid", authController.validToken)
   .get("/api/v1/users", userController.getUsers)
   .post("/api/v1/users", userController.saveUser)
@@ -28,6 +29,6 @@ router
   .delete("/api/v1/motorcycles/:id", motocycleController.deleteMotorcycle)
 
   .post("/api/v1/tracking", trackingController.saveTracking)
-  .post("/api/v1/tracking/images", trackingController.saveImageTracking);
-
+  .post("/api/v1/tracking/images", trackingController.saveImageTracking)
+  .use("/", authController.notFound);
 module.exports = router;
