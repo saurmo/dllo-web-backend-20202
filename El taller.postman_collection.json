@@ -1,0 +1,498 @@
+{
+	"info": {
+		"_postman_id": "0b06e0a1-a870-48b9-8408-bbdd6476594e",
+		"name": "El taller",
+		"description": "Peticiones para el programa de El taller",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "Save user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2wiOiJzdXBlci1hZG1pbiIsInJvbGVzIjoic3VwZXItYWRtaW4iLCJpZCI6ImNvbXB1YXVsYXMiLCJuYW1lIjoiQWRtaW4gQ29tcHVhdWxhcyAtIFVuaXZlcnNpZGFkZXMiLCJ1aWQiOiJiMWY0Njg1Zi1hYmExLTQwNTQtODE1Ni00OTAyNDA4YjE4OTYiLCJkb2MiOnsiaWQiOiJjb21wdWF1bGFzIiwicm9sIjoic3VwZXItYWRtaW4iLCJ1aWQiOiJiMWY0Njg1Zi1hYmExLTQwNTQtODE1Ni00OTAyNDA4YjE4OTYiLCJlc3RhZG8iOiJhY3Rpdm8tYWRtaW4tMCIsIm5vbWJyZSI6IkFkbWluIENvbXB1YXVsYXMgLSBVbml2ZXJzaWRhZGVzIiwiZW50aWRhZCI6IjFiNjFhOTdkLTg3MDItNDU1NS05ZWJlLWMxYWQzNWJlN2M5ZSIsInpvbmFIb3JhcmlhIjp7Im5hbWUiOiJDT1QiLCJsYWJlbCI6IkFtZXJpY2EvQm9nb3RhIn19LCJlc3RhZG8iOiJhY3Rpdm8tYWRtaW4tMCIsImlhdCI6MTYwMjgwMjI0OSwiZXhwIjoxNjAyODg4NjQ5fQ.W7FaBloZ3KothXMVqx0sM-_AEPmwPHP-YEtA6_bLHMw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n      \"identification_type\": \"01\",\n      \"id\": \"002\",\n      \"firstname\": \"Carolina\",\n      \"lastname\": \"Urrego\",\n      \"email\": \"carolina@udem.edu.co\",\n      \"password\": \"Admin123!\",\n      \"phone\": \"3216242003\",\n      \"accepted\": true,\n      \"rol\": 1\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "90647017-f660-4e8b-af5e-f360680e4ce9",
+								"exec": [
+									"",
+									"let jsonData = pm.response.json();",
+									"let token = jsonData.info;",
+									"pm.environment.set(\"token\", token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"type": "text",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2wiOiJzdXBlci1hZG1pbiIsInJvbGVzIjoic3VwZXItYWRtaW4iLCJpZCI6ImNvbXB1YXVsYXMiLCJuYW1lIjoiQWRtaW4gQ29tcHVhdWxhcyAtIFVuaXZlcnNpZGFkZXMiLCJ1aWQiOiJiMWY0Njg1Zi1hYmExLTQwNTQtODE1Ni00OTAyNDA4YjE4OTYiLCJkb2MiOnsiaWQiOiJjb21wdWF1bGFzIiwicm9sIjoic3VwZXItYWRtaW4iLCJ1aWQiOiJiMWY0Njg1Zi1hYmExLTQwNTQtODE1Ni00OTAyNDA4YjE4OTYiLCJlc3RhZG8iOiJhY3Rpdm8tYWRtaW4tMCIsIm5vbWJyZSI6IkFkbWluIENvbXB1YXVsYXMgLSBVbml2ZXJzaWRhZGVzIiwiZW50aWRhZCI6IjFiNjFhOTdkLTg3MDItNDU1NS05ZWJlLWMxYWQzNWJlN2M5ZSIsInpvbmFIb3JhcmlhIjp7Im5hbWUiOiJDT1QiLCJsYWJlbCI6IkFtZXJpY2EvQm9nb3RhIn19LCJlc3RhZG8iOiJhY3Rpdm8tYWRtaW4tMCIsImlhdCI6MTYwMjgwMjI0OSwiZXhwIjoxNjAyODg4NjQ5fQ.W7FaBloZ3KothXMVqx0sM-_AEPmwPHP-YEtA6_bLHMw"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"002\",\n    \"password\": \"Admin123!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"login"
+							]
+						},
+						"description": "Login user with id and password"
+					},
+					"response": []
+				},
+				{
+					"name": "Valid token",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/v1/valid",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"v1",
+								"valid"
+							]
+						},
+						"description": "Valid token"
+					},
+					"response": []
+				},
+				{
+					"name": "Get users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/users/002",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"users",
+								"002"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/v1/users/002",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"002"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"001\",\n    \"identification_type\": \"CE\",\n   \n    \"lastname\": \"Urrego\",\n    \"email\": \"saurrego@udem.edu.co\",\n    \"phone\": \"3216242003\",\n    \"rol\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/v1/users/001",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"001"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "motorcycles",
+			"item": [
+				{
+					"name": "Save motorcycle",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"placa\":\"AAA31D\",\n\"id_propietario\":\"001\",\n\"modelo\":\"2020\",\n\"marca\":\"HONDA\",\n\"color\":\"Blanca\",\n\"cilindraje\":\"190\",\n\"nro_tecnomecanica\":\"002546825\",\n\"vencimiento_tecnomecanica\":\"2021-12-01\",\n\"nro_soat\":\"wr5684f65\",\n\"vencimiento_soat\":\"2021-06-01\",\n\"nro_matricula\":\"8954673\",\n\"estado\":\"Mantenimiento\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/v1/motorcycles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"v1",
+								"motorcycles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update motorcycle",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"placa\": \"AAA31D\",\n    \"id_propietario\": \"001\",\n    \"modelo\": \"2020\",\n    \"marca\": \"HONDA\",\n    \"color\": \"Negra\",\n    \"cilindraje\": \"190\",\n    \"nro_tecnomecanica\": \"002546825\",\n    \"vencimiento_tecnomecanica\": \"2021-12-01T05:00:00.000Z\",\n    \"nro_soat\": \"wr5684f65\",\n    \"vencimiento_soat\": \"2021-06-01T05:00:00.000Z\",\n    \"nro_matricula\": \"8954673\",\n    \"estado\": \"Mantenimiento\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/v1/motorcycles/AAA31D",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"v1",
+								"motorcycles",
+								"AAA31D"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get motorcycles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/v1/motorcycles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"v1",
+								"motorcycles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete motorcycle",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/v1/motorcycles/AAA31D",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"v1",
+								"motorcycles",
+								"AAA31D"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "tracking",
+			"item": [
+				{
+					"name": "Save image tracking",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fileUpload",
+									"type": "file",
+									"src": "/Users/santiagourrego/Desktop/recursos/blanco para pruebas.xlsx"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/v1/tracking/images",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"v1",
+								"tracking",
+								"images"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Obtener identificaciones",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/identification_types",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"identification_types"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Guardar identificacion",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"06\",\n    \"name\": \"OTRO\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/identification_types",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"identification_types"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar identificacion",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"06\",\n    \"name\": \"Otra identificación\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/identification_types/06",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"identification_types",
+						"06"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar identificacion",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/identification_types/06",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"identification_types",
+						"06"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
