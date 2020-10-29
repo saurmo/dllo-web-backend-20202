@@ -10,7 +10,15 @@ const getUsers = async (request, response) => {
     let rows = responseDB.rows;
     rows = rows.map((x) => {
       delete x.clave;
-      return x;
+      let user = {};
+      user.identification_type = x.tipo_identificacion;
+      user.id = x.id;
+      user.firstname = x.nombre;
+      user.lastname = x.apellido;
+      user.email = x.correo;
+      user.rol = x.rol;
+      user.nombre_rol = x.nombre_rol;
+      return user;
     });
 
     let responseJSON = {};
@@ -52,6 +60,7 @@ const saveUser = async (request, response) => {
     responseJSON.info = body;
     response.status(201).send(responseJSON);
   } catch (error) {
+    console.log(error);
     let responseJSON = {};
     responseJSON.ok = false;
     responseJSON.message = "Error while create user.";

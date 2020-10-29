@@ -15,14 +15,14 @@ const loginUser = async (request, response) => {
     let rowCount = responseDB.rowCount;
     if (rowCount == 1) {
       let user = responseDB.rows[0];
-
       responseJSON.message = "Users ok";
-      responseJSON.info = jwt.createToken(user);
+      responseJSON.info = { token: jwt.createToken(user), rol: user.rol };
       response.send(responseJSON);
     } else {
+      responseJSON.ok = false;
       responseJSON.message = "Users not found (Verify id, password)";
       responseJSON.info = [];
-      response.send(responseJSON);
+      response.status(404).send(responseJSON);
     }
   } catch (error) {
     console.log(error);
