@@ -27,8 +27,8 @@ const methods = {
   async saveMotorcycle(request, response) {
     try {
       let sql =
-        "INSERT INTO public.motos (placa, id_propietario, modelo, marca, color, cilindraje, nro_tecnomecanica, vencimiento_tecnomecanica, nro_soat, vencimiento_soat, nro_matricula, estado) ";
-      sql += " VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12);";
+        "INSERT INTO public.motos (placa, id_propietario, modelo, marca, color, cilindraje, nro_tecnomecanica, vencimiento_tecnomecanica, nro_soat, vencimiento_soat, nro_matricula, estado, imagen) ";
+      sql += " VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13);";
       let body = request.body;
       let values = [
         body.placa,
@@ -43,6 +43,7 @@ const methods = {
         body.vencimiento_soat,
         body.nro_matricula,
         body.estado,
+        body.imagen,
       ];
       await _servicePg.execute(sql, values);
       let responseJSON = {};
@@ -60,6 +61,29 @@ const methods = {
     }
   },
 
+  /**
+   *
+   * @param {Request} request
+   * @param {*} response
+   */
+  async saveImage(request, response) {
+    try {
+      let archivo = request.files.imagen;
+      await archivo.mv("docs/" + archivo.name);
+      let responseJSON = {};
+      responseJSON.ok = true;
+      responseJSON.message = "File uploaded";
+      responseJSON.info = archivo.name;
+      response.send(responseJSON);
+    } catch (error) {
+      console.log(error);
+      let responseJSON = {};
+      responseJSON.ok = false;
+      responseJSON.message = "Error while create image tracking.";
+      responseJSON.info = error;
+      response.status(400).send(responseJSON);
+    }
+  },
   async updateMotorcycle(request, response) {
     try {
       let placa = request.params.id;

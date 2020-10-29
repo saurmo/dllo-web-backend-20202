@@ -30,6 +30,7 @@ CREATE TABLE public.motos (
 	vencimiento_soat date  NULL,
 	nro_matricula varchar  NULL,
 	estado varchar  NULL,
+	imagen varchar  NULL,
 	CONSTRAINT motos_pk PRIMARY KEY (placa)
 );
 

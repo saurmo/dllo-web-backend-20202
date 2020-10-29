@@ -26,6 +26,7 @@ router
 
   .get("/api/v1/motorcycles", motocycleController.getMotorcycles)
   .post("/api/v1/motorcycles", motocycleController.saveMotorcycle)
+  .post("/api/v1/motorcycles/image", motocycleController.saveImage)
   .put("/api/v1/motorcycles/:id", motocycleController.updateMotorcycle)
   .delete("/api/v1/motorcycles/:id", motocycleController.deleteMotorcycle)
 
