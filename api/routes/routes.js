@@ -30,6 +30,8 @@ router
   .put("/api/v1/motorcycles/:id", motocycleController.updateMotorcycle)
   .delete("/api/v1/motorcycles/:id", motocycleController.deleteMotorcycle)
 
+  .get("/api/v1/tracking", trackingController.saveTracking)
+  .get("/api/v1/tracking/:id_motorcycle", trackingController.getTrackingsByMotorcycle)
   .post("/api/v1/tracking", trackingController.saveTracking)
   .post("/api/v1/tracking/images", trackingController.saveImageTracking)
 

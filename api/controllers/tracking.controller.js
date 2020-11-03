@@ -1,5 +1,9 @@
 const ServicePostgres = require("../services/postgres");
+const { readSql } = require("../services/files");
+const { success, error } = require("./response");
 const _servicePg = new ServicePostgres();
+
+const FOLDER_SQL = "tracking";
 
 const getTrackings = async (request, response) => {
   try {
@@ -23,6 +27,18 @@ const getTrackings = async (request, response) => {
   }
 };
 
+const getTrackingsByMotorcycle = async (request, response) => {
+  try {
+    let id_motorcycle = request.params.id_motorcycle;
+    let sql = readSql(FOLDER_SQL, "get-tracking-by-motorcycle");
+    let values = [id_motorcycle];
+    let info = await _servicePg.execute(sql, values);
+    return success(response, { message: "Ok tracking", info: info.rows });
+  } catch (er) {
+    return error(response, { message: "Error get tracking", info: er });
+  }
+};
+
 /**
  *
  * @param {Request} request
@@ -31,18 +47,16 @@ const getTrackings = async (request, response) => {
 const saveTracking = async (request, response) => {
   try {
     let sql =
-      "INSERT INTO public.seguimientos (id_mecanico, placa, fecha, mano_obra, repuestos, horas, imagen)";
-    sql += " VALUES($1, $2, $3, $4, $5, $6, $7, $8);";
+      "INSERT INTO public.seguimientos (id_mecanico, placa, fecha, mano_obra, repuestos, horas)";
+    sql += " VALUES($1, $2, now(), $3, $4, $5);";
 
     let body = request.body;
     let values = [
       body.id_mecanico,
       body.placa,
-      body.fecha,
       body.mano_obra,
       body.repuestos,
       body.horas,
-      body.imagen,
     ];
     await _servicePg.execute(sql, values);
 
@@ -98,4 +112,9 @@ const saveImageTracking = async (request, response) => {
   }
 };
 
-module.exports = { saveTracking, getTrackings, saveImageTracking };
+module.exports = {
+  saveTracking,
+  getTrackings,
+  saveImageTracking,
+  getTrackingsByMotorcycle,
+};

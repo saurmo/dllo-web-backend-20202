@@ -88,7 +88,7 @@ const methods = {
     try {
       let placa = request.params.id;
       let sql =
-        "UPDATE public.motos SET id_propietario=$1, modelo=$2, marca=$3, color=$4, cilindraje=$5, nro_tecnomecanica=$6, vencimiento_tecnomecanica=$7, nro_soat=$8, vencimiento_soat=$9, nro_matricula=$10, estado=$11 WHERE placa=$12;";
+        "UPDATE public.motos SET id_propietario=$1, modelo=$2, marca=$3, color=$4, cilindraje=$5, nro_tecnomecanica=$6, vencimiento_tecnomecanica=$7, nro_soat=$8, vencimiento_soat=$9, nro_matricula=$10, estado=$11, imagen=$12 WHERE placa=$13;";
       let body = request.body;
       let values = [
         body.id_propietario,
@@ -102,6 +102,7 @@ const methods = {
         body.vencimiento_soat,
         body.nro_matricula,
         body.estado,
+        body.imagen,
         placa,
       ];
       await _servicePg.execute(sql, values);
