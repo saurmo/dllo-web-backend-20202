@@ -1,11 +1,14 @@
 const express = require("express");
 const router = express.Router();
+const path = require("path");
 
 const userController = require("../controllers/users.controller");
 const motocycleController = require("../controllers/motorcycles.controller");
 const trackingController = require("../controllers/tracking.controller");
 const authController = require("../controllers/auth.controller");
 const rolesController = require("../controllers/roles.controller");
+
+const RUTA_DOCS = path.join(__dirname, "../../docs");
 
 router.get("/api/v1", (request, response) => {
   response.send("Api el-taller");
@@ -16,7 +19,16 @@ router.get("/api/v1", (request, response) => {
  */
 
 router
+  /**
+   * RUTAS PUBLICAS
+   * - NO requiere de token
+   */
+  .use("/public", express.static(RUTA_DOCS))
   .post("/api/v1/login", authController.loginUser)
+  /**
+   * INICIO DE RUTAS PRIVADAS
+   * -Requiere de un token
+   */
   .use("/", authController.middleware)
   .get("/api/v1/valid", authController.validToken)
   .get("/api/v1/users", userController.getUsers)

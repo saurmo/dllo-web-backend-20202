@@ -8,6 +8,13 @@ const methods = {
       let responseDB = await _servicePg.execute(sql);
       let rowCount = responseDB.rowCount;
       let rows = responseDB.rows;
+      rows = rows.map((x) => {
+        x.imagen =
+          x.imagen && x.imagen.length > 0
+            ? process.env.URL_DOCS + x.imagen
+            : process.env.URL_DOCS + "404.png";
+        return x;
+      });
 
       let responseJSON = {};
       responseJSON.ok = true;

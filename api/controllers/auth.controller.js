@@ -1,5 +1,6 @@
 const ServicePostgres = require("../services/postgres");
 const _servicePg = new ServicePostgres();
+const path = require("path");
 
 const jwt = require("../services/jwt");
 
@@ -85,6 +86,7 @@ const notFound = (request, response) => {
   responseJSON.ok = false;
   responseJSON.message = "Error, endpoint not found";
   responseJSON.info = request.url;
+  // response.status(404).sendFile(path.join(__dirname, "../../docs/404.png"));
   response.status(404).send(responseJSON);
 };
 

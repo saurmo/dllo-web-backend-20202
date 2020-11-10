@@ -1,4 +1,6 @@
 const ServicePostgres = require("../services/postgres");
+const fs = require("fs");
+const { sendMail } = require("../services/nodemailer");
 const _servicePg = new ServicePostgres();
 
 const getUsers = async (request, response) => {
@@ -53,7 +55,12 @@ const saveUser = async (request, response) => {
       body.password,
       body.rol,
     ];
+    // GUARDAR USUARIO EN BASE DE DATOS
     await _servicePg.execute(sql, values);
+    // ENVIAR CORREO DE BIENVENIDA
+    let templateEmail = fs.readFileSync("api/templates/email_welcome.html").toString();
+    await sendMail(body.email, "Bienvenido al taller", templateEmail);
+
     let responseJSON = {};
     responseJSON.ok = true;
     responseJSON.message = "User created";
