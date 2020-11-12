@@ -58,8 +58,10 @@ const saveUser = async (request, response) => {
     // GUARDAR USUARIO EN BASE DE DATOS
     await _servicePg.execute(sql, values);
     // ENVIAR CORREO DE BIENVENIDA
-    let templateEmail = fs.readFileSync("api/templates/email_welcome.html").toString();
-    await sendMail(body.email, "Bienvenido al taller", templateEmail);
+    try {
+      let templateEmail = fs.readFileSync("api/templates/email_welcome.html").toString();
+      await sendMail(body.email, "Bienvenido al taller", templateEmail);
+    } catch (error) {}
 
     let responseJSON = {};
     responseJSON.ok = true;
