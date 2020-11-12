@@ -1,10 +1,8 @@
-
 CREATE TABLE public.roles (
 	id serial NOT NULL,
-	nombre varchar NOT NULL,	
+	nombre varchar NOT NULL,
 	CONSTRAINT roles_pk PRIMARY KEY (id)
 );
-
 CREATE TABLE public.usuarios (
 	id varchar(20) NOT NULL,
 	tipo_identificacion varchar(40) NULL,
@@ -13,35 +11,35 @@ CREATE TABLE public.usuarios (
 	correo varchar NOT NULL,
 	celular varchar(10) NULL,
 	clave varchar(50) NOT NULL,
-	rol integer NOT NULL,
+	rol int4 NOT NULL,
 	CONSTRAINT usuarios_pk PRIMARY KEY (id)
 );
 
 CREATE TABLE public.motos (
-	placa varchar(20) NOT NULL, 
+	placa varchar(20) NOT NULL,
 	id_propietario varchar(20) NOT NULL,
 	modelo varchar NULL,
 	marca varchar NULL,
-	color varchar  NULL,
-	cilindraje varchar  NULL,
-	nro_tecnomecanica varchar  NULL,
-	vencimiento_tecnomecanica date  NULL,
-	nro_soat varchar  NULL,
-	vencimiento_soat date  NULL,
-	nro_matricula varchar  NULL,
-	estado varchar  NULL,
-	imagen varchar  NULL,
+	color varchar NULL,
+	cilindraje varchar NULL,
+	nro_tecnomecanica varchar NULL,
+	vencimiento_tecnomecanica date NULL,
+	nro_soat varchar NULL,
+	vencimiento_soat date NULL,
+	nro_matricula varchar NULL,
+	estado varchar NULL,
+	imagen varchar NULL,
 	CONSTRAINT motos_pk PRIMARY KEY (placa)
 );
 
 CREATE TABLE public.seguimientos (
-    id serial NOT NULL,
-	id_mecanico varchar(20) NOT NULL, 
+	id serial NOT NULL,
+	id_mecanico varchar(20) NOT NULL,
 	placa varchar(20) NOT NULL,
-    fecha datetime  NOT NULL,
+	fecha timestamp NOT NULL,
 	mano_obra text NOT NULL,
-	repuestos text NOT NULL,	
-	horas integer  NOT NULL,
+	repuestos text NOT NULL,
+	horas int4 NOT NULL,
 	imagen varchar NULL,
 	CONSTRAINT seguimientos_pk PRIMARY KEY (id)
 );
