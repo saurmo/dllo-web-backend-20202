@@ -25,13 +25,14 @@ router
    */
   .use("/public", express.static(RUTA_DOCS))
   .post("/api/v1/login", authController.loginUser)
+  .get("/api/v1/users", userController.getUsers)
   /**
    * INICIO DE RUTAS PRIVADAS
    * -Requiere de un token
    */
   .use("/", authController.middleware)
   .get("/api/v1/valid", authController.validToken)
-  .get("/api/v1/users", userController.getUsers)
+
   .post("/api/v1/users", userController.saveUser)
   .put("/api/v1/users/:id", userController.updateUser)
   .delete("/api/v1/users/:id", userController.deleteUser)
