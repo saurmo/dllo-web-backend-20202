@@ -17,5 +17,6 @@
 
 1. login `heroku login`
 2. Conectar repositorio `heroku git:remote -a NOMBRE-PROYECTO-HEROKU`
-3. Crear el script de start en el package json ` "start": "MODE=production node app.js",`
-4. Subir cambios a heroku `git push heroku master`
+3. Crear el script de start en el package json ` "start": "MODE=production node api"`
+4. Verificar process.env
+5. Subir cambios a heroku `git push heroku master`
