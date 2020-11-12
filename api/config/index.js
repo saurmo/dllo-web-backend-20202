@@ -1,4 +1,3 @@
-require("../../password/keys");
 process.env.NODE_ENV = process.env.NODE_ENV || "dev";
 
 console.log("Enviroment", process.env.NODE_ENV);
